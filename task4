@@ -1,0 +1,15 @@
+public class Main {
+
+    public static void main(String[] args) {
+        System.out.println(numberRange(12,5)); //проверка
+    }
+
+    public static boolean numberRange(int a, int b){
+        boolean bool;
+        int sum = a + b;
+
+        if (sum >=10 && sum <=20) return bool = true;
+        return bool = false;
+
+    }
+}

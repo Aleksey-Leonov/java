@@ -1,0 +1,18 @@
+public class Main {
+
+    public static void main(String[] args) {
+
+        byte b = 1;
+        short sh = 2;
+        int i = 10;
+        long l = 999999;
+        float f = 10.2f;
+        double d = 215.2;
+        char ch = 'f';
+        boolean bool = true;
+
+        String text = "Hello World";
+        
+
+    }
+}
