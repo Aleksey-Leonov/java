@@ -1,0 +1,11 @@
+public class Main {
+
+    public static void main(String[] args) {
+	int a,b,c,d;
+
+    }
+    public static int result (int a, int b, int c, int d){
+        int result = a * (b + (c / d));
+        return result;
+    }
+}

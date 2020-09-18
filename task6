@@ -1,0 +1,13 @@
+public class Main {
+
+    public static void main(String[] args) {
+        
+    }
+
+    public static void aBoolean (int a){
+        boolean b;
+        if (a<0) b = true;
+        else b = false;
+        System.out.println(b);
+    }
+}
