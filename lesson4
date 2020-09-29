@@ -1,0 +1,122 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        char[][] field = getField();
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        play(scanner, random);
+
+
+    }
+
+    static boolean doEvil(char[][] field) {
+        int count = field.length * field.length;
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                if (field[i][j] != '-') {
+                    count--;
+                }
+            }
+        }
+        return count == 0;
+    }
+
+    static void play(Scanner scanner, Random random) {
+        char[][] field = getField();
+        doFieldOutpot(field);
+
+        do {
+            doPlayerMove(scanner, field);
+            if (doEvil(field)) {
+                System.out.println("Ни кто не победил!");
+                break;
+            }
+            if (checkWin(field, 'X')) {
+                System.out.println("Вы победили!");
+                break;
+            }
+            doAIMove(random, field);
+            if (doEvil(field)) {
+                System.out.println("Ни кто не победил!");
+                break;
+            }
+            if (checkWin(field, '0')) {
+                System.out.println("ИИ победил");
+                break;
+            }
+            doFieldOutpot(field);
+        } while (true);
+
+        System.out.println("Финальный результат");
+        doFieldOutpot(field);
+
+    }
+
+    static void doPlayerMove(Scanner scanner, char[][] field) {     //ход игрока
+        int x, y;
+        do {
+            x = coordinateName(scanner, field);
+            y = coordinateName(scanner, field);
+        } while (field[x][y] != '-');
+        field[x][y] = 'X';
+
+    }
+
+    static void doAIMove(Random random, char[][] field) {           //ход ИИ
+        int x, y;
+        do {
+            x = random.nextInt(3);
+            y = random.nextInt(3);
+        } while (field[x][y] != '-');
+        field[x][y] = '0';
+    }
+
+    static int coordinateName(Scanner scanner, char[][] coordName) {
+        int coord;
+        do {
+            System.out.println("Введите координаты от 1 до 3 ");
+            coord = scanner.nextInt() - 1;
+        } while (coord < 0 || coord > 2);
+        return coord;
+    }
+
+    static boolean checkWin(char[][] field, char sign) {
+        for (int i = 0; i < field.length; i++) {
+            if (field[i][0] == sign && field[i][1] == sign && field[i][2] == sign)
+                return true;          // для вертикали
+        }
+        for (int j = 0; j < field.length; j++) {
+            if (field[0][j] == sign && field[1][j] == sign && field[2][j] == sign)
+                return true;          //для горизонтали
+        }
+
+        if (field[0][0] == sign && field[1][1] == sign && field[2][2] == sign) return true; //для диагонали
+        else if (field[0][2] == sign && field[1][1] == sign && field[2][0] == sign) return true;
+        return false;
+
+    }
+
+
+    static char[][] getField() {
+        return new char[][]{
+                {'-', '-', '-'},
+                {'-', '-', '-'},
+                {'-', '-', '-'}
+        };
+    }
+
+    static void doFieldOutpot(char[][] field) {   //делаем вывод поля
+        for (int i = 0; i < field.length; i++) {
+            for (int j = 0; j < field.length; j++) {
+                System.out.print(" " + field[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+}
+
